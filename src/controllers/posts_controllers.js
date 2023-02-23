@@ -46,7 +46,7 @@ try {
          );
     if (result.affectedRows === 0)
          return res.status(404).json({message :"no encontrado"})
-    const[rows] = await pool.query("SELECT * FROM posts WHERE idposts = ?", [idposts])
+    const[rows] = await pool.query("SELECT * FROM posts WHERE idposts = ?", [idposts,])
     res.json(rows[0]);
 } catch (error) {
     return res.status(500).json({message: "error"})    
