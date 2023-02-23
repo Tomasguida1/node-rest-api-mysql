@@ -9,6 +9,7 @@ res.json(rows)
 }
 export const getPost = async(req, res) => {
     try {
+        const { idposts } = req.params;
         const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[idposts])
     
         if  (rows.length <= 0) return res.status(404).json({message: "employee not found"})
@@ -46,6 +47,7 @@ try {
 
 export const dltPosts = async(req, res) => {
     try {
+        const { idposts } = req.params;
         const result = await pool.query("DELETE FROM posts WHERE idposts = ?",[idposts]    ) 
 if (result.affectedRows > 0) return res.status(404).json({message: "employee not found"})
 res.sendStatus(204)
