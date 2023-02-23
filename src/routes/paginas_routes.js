@@ -4,12 +4,12 @@ import {getPosts,getPost, uplPosts, updPosts, dltPosts} from '../controllers/pos
 const router = Router()
 router.get('/posts',  getPosts)
 
-router.get('/posts/:id', getPost)
+router.get('/posts/:idposts', getPost)
 
 router.post('/posts',uplPosts)
 
-router.patch('/posts/:id',updPosts) 
+router.patch('/posts/:idposts',updPosts) 
 
-router.delete('/posts/:id', dltPosts)
+router.delete('/posts/:idposts', dltPosts)
 
 export default router

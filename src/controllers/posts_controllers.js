@@ -1,4 +1,6 @@
 import {pool} from '../db.js'
+
+
 export const getPosts = async (req, res) => {
 try{
 const {rows} = await pool.query("SELECT * FROM posts")
@@ -6,7 +8,8 @@ res.json(rows)
 } catch (error){
     return res.status(500).json({message: "error"})
 }
-}
+};
+
 export const getPost = async(req, res) => {
     try {
         const { idposts } = req.params;
@@ -18,7 +21,7 @@ export const getPost = async(req, res) => {
         return res.status(500).json({message: "error"})
     }
 
-    }
+    };
 
 export const uplPosts = async (req, res) => {
     const {title, description, img} = req.body
@@ -29,7 +32,7 @@ res.send({idpost : rows.insertId, title, description, img})
     } catch (error) {
         return res.status(500).json({message: "error"})
     }
-}
+};
 
 export const updPosts =async(req, res) => {
     const {idposts} = req.params;
@@ -43,7 +46,7 @@ try {
 } catch (error) {
     return res.status(500).json({message: "error"})    
 }
-}
+};
 
 export const dltPosts = async(req, res) => {
     try {
@@ -54,4 +57,4 @@ res.sendStatus(204)
     } catch (error) {
         return res.status(500).json({message: "error"})         
     }
-}
+};
