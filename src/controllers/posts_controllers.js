@@ -3,7 +3,7 @@ import {pool} from '../db.js'
 
 export const getPosts = async (req, res) => {
 try{
-const {rows} = await pool.query("SELECT * FROM posts")
+const [rows] = await pool.query("SELECT * FROM posts")
 res.json(rows)
 } catch (error){
     return res.status(500).json({message: "error"})
@@ -35,9 +35,10 @@ res.send({idpost : rows.insertId, title, description, img})
 };
 
 export const updPosts =async(req, res) => {
+
+try {
     const {idposts} = req.params;
     const {title, description, img} = req.body;
-try {
 
     const result = await pool.query("UPDATE posts SET title = IFNULL(?,  title) , description = IFNULL(?,  description) , img = IFNULL(?,  img) WHERE idposts = ?", [title, description, img, idposts])
     if (result.affectedRows === 0) return res.status(404).json({message :"no encontrado"})
