@@ -40,10 +40,10 @@ try {
     const {idposts} = req.params;
     const {title, description, img} = req.body;
 
-    const result = await pool.query("UPDATE posts SET title = IFNULL(?,  title) , description = IFNULL(?,  description) , img = IFNULL(?,  img) WHERE idposts = ?", [title, description, img, idposts])
+    const [result] = await pool.query("UPDATE posts SET title = IFNULL(?,  title) , description = IFNULL(?,  description) , img = IFNULL(?,  img) WHERE idposts = ?", [title, description, img, idposts])
     if (result.affectedRows === 0) return res.status(404).json({message :"no encontrado"})
     const[rows] = await pool.query("SELECT * FROM posts where idposts = ?", [idposts])
-    res.json(rows)
+    res.json(rows[0])
 } catch (error) {
     return res.status(500).json({message: "error"})    
 }
