@@ -9,7 +9,7 @@ res.json(rows)
 }
 export const getPost = async(req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[req.params.ids ])
+        const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[id])
     
         if  (rows.length <= 0) return res.status(404).json({message: "employee not found"})
         res.json(rows[0])
@@ -31,13 +31,13 @@ res.send({idpost : rows.insertId, title, description, img})
 }
 
 export const updPosts =async(req, res) => {
-    const {idposts} = req.params
-    const {title, description, img} = req.body
+    const {idposts} = req.params;
+    const {title, description, img} = req.body;
 try {
 
     const result = await pool.query("UPDATE posts SET title = IFNULL(?,  title) , description = IFNULL(?,  description) , img = IFNULL(?,  img) WHERE idposts = ?", [title, description, img, idposts])
     if (result.affectedRows === 0) return res.status(404).json({message :"no encontrado"})
-    const[rows] = await pool.query("SELECT * FROM posts where idposts = ?", [idposts])
+    const[rows] = await pool.query("SELECT * FROM posts where idposts = ?", [id])
     res.json(rows)
 } catch (error) {
     return res.status(500).json({message: "error"})    
@@ -46,7 +46,7 @@ try {
 
 export const dltPosts = async(req, res) => {
     try {
-        const result = await pool.query("DELETE FROM posts WHERE idposts = ?",[req.params.ids ]    ) 
+        const result = await pool.query("DELETE FROM posts WHERE idposts = ?",[id]    ) 
 if (result.affectedRows > 0) return res.status(404).json({message: "employee not found"})
 res.sendStatus(204)
     } catch (error) {

@@ -7,4 +7,9 @@ CREATE TABLE posts (
     title VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     img VARCHAR(255) NOT NULL
+    PRIMARY KEY (idposts)
 )
+
+DESCRIBE posts;
+INSERT INTO posts VALUES
+(1, "gipe", "gipeto","gipeto.jpg");
