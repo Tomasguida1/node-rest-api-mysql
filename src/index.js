@@ -4,3 +4,8 @@
 import app from './app.js';
 import { PORT } from './config.js'
 app.listen(PORT);
+
+const cors = require('cors');
+app.use(cors({
+    origin: '*'
+}));

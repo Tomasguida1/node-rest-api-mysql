@@ -34,7 +34,7 @@ res.send({idpost : rows.insertId, title, description, img})
     }
 };
 
-export const updPosts =async(req, res) => {
+export const updPosts = async(req, res) => {
 
 try {
     const {idposts} = req.params;
