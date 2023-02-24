@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+/*import cors from 'cors';*/
 import PaginasRoutes from "./routes/paginas_routes.js"
 
 
@@ -11,8 +11,8 @@ app.use(cors);
 app.use(express.json());
 
 
-app.use(cors({
-    origin: '*'}));
+/*app.use(cors({
+    origin: '*'}));*/
 
 app.use("/api", PaginasRoutes);
 
