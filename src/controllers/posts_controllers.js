@@ -36,7 +36,7 @@ export const updPosts =async(req, res) => {
     const {title, description, img,materials, stepbystep} = req.body
 try {
 
-    const result = await pool.query("UPDATE posts SET title = IFNULL(?,  title) , description = IFNULL(?,  description) , img = IFNULL(?,  img), ,materials = IFNULL(?,  materials), stepbystep = IFNULL(?,  stepbystep) WHERE idposts = ?", [title, description, img,,materials, stepbystep, idposts])
+    const result = await pool.query("UPDATE posts SET title = IFNULL(?,  title) , description = IFNULL(?,  description) , img = IFNULL(?,  img), materials = IFNULL(?,  materials), stepbystep = IFNULL(?,  stepbystep) WHERE idposts = ?", [title, description, img,,materials, stepbystep, idposts])
     if (result.affectedRows === 0) return res.status(404).json({message :"no encontrado"})
     const[rows] = await pool.query("SELECT * FROM posts where idposts = ?", [idposts])
     res.json(rows)
