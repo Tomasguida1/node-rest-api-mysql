@@ -13,7 +13,7 @@ export const getPosts = async (req, res) => {
             const { idposts } = req.params;
             const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[idposts])
         
-            if  (rows.length <= 0) return res.status(404).json({message: "employee not found"})
+            if  (rows.length <= 0) return res.status(404).json({message: "post not found"})
             res.json(rows[0])
         }catch(error){
             return res.status(500).json({message: "error"})
