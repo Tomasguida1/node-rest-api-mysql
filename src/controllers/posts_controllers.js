@@ -24,7 +24,7 @@ export const uplPosts = async (req, res) => {
     const {title, description, img,materials, stepbystep } = req.body
     try {
 
- const [rows] = await pool.query('INSERT INTO posts (title, description, img, ,materials, stepbystep) VALUES (?, ?,?,?,?)',[title, description, img, ,materials, stepbystep ])
+ const [rows] = await pool.query('INSERT INTO posts (title, description, img ,materials, stepbystep) VALUES (?, ?,?,?,?)',[title, description, img, ,materials, stepbystep ])
 res.send({idpost : rows.insertId, title, description, img, materials, stepbystep})
     } catch (error) {
         return res.status(500).json({message: error})
