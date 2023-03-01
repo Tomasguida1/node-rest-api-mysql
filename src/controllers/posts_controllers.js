@@ -5,17 +5,17 @@ try{
 const {rows} = await pool.query("SELECT * FROM posts")
 res.json(rows)
 } catch (error){
-    return res.status(500).json({message: "error"})
+    return res.status(500).json({message: error})
 }
 }
 export const getPost = async(req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[req.params.ids ])
     
-        if  (rows.length <= 0) return res.status(404).json({message: "employee not found"})
+        if  (rows.length <= 0) return res.status(404).json({message: "post not found"})
         res.json(rows[0])
     }catch(error){
-        return res.status(500).json({message: "error"})
+        return res.status(500).json({message: error})
     }
 
     }
@@ -27,7 +27,7 @@ export const uplPosts = async (req, res) => {
  const [rows] = await pool.query('INSERT INTO posts (title, description, img, ,materials, stepbystep) VALUES (?, ?,?,?,?)',[title, description, img, ,materials, stepbystep ])
 res.send({idpost : rows.insertId, title, description, img, materials, stepbystep})
     } catch (error) {
-        return res.status(500).json({message: "error"})
+        return res.status(500).json({message: error})
     }
 }
 
@@ -41,7 +41,7 @@ try {
     const[rows] = await pool.query("SELECT * FROM posts where idposts = ?", [idposts])
     res.json(rows)
 } catch (error) {
-    return res.status(500).json({message: "error"})    
+    return res.status(500).json({message: error})    
 }
 }
 
@@ -51,6 +51,6 @@ export const dltPosts = async(req, res) => {
 if (result.affectedRows > 0) return res.status(404).json({message: "employee not found"})
 res.sendStatus(204)
     } catch (error) {
-        return res.status(500).json({message: "error"})         
+        return res.status(500).json({message: error})         
     }
 }
