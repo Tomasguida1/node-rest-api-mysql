@@ -1,24 +1,24 @@
 import {pool} from '../db.js'
 
 export const getPosts = async (req, res) => {
-try{
-const {rows} = await pool.query("SELECT * FROM posts")
-return res.json(rows)
-} catch (error){
-    return res.status(500).json({message: error})
-}
-}
-export const getPost = async(req, res) => {
-    try {
-        const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[req.params.ids ])
-    
-        if  (rows.length <= 0) return res.status(404).json({message: "post not found"})
-        return res.json(rows[0])
-    }catch(error){
-        return res.status(500).json({message: error})
+    try{
+    const [rows] = await pool.query("SELECT * FROM posts")
+    res.json(rows)
+    } catch (error){
+        return res.status(500).json({message: "error"})
     }
-
-    }
+    };
+    export const getPost = async(req, res) => {
+        try {
+            const { idposts } = req.params;
+            const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[idposts])
+        
+            if  (rows.length <= 0) return res.status(404).json({message: "employee not found"})
+            res.json(rows[0])
+        }catch(error){
+            return res.status(500).json({message: "error"})
+        }
+        };
 
 export const uplPosts = async (req, res) => {
     const {title, description, img,materials, stepbystep } = req.body
