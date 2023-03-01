@@ -3,7 +3,7 @@ import {pool} from '../db.js'
 export const getPosts = async (req, res) => {
 try{
 const {rows} = await pool.query("SELECT * FROM posts")
-res.json(rows)
+return res.json(rows)
 } catch (error){
     return res.status(500).json({message: error})
 }
@@ -13,7 +13,7 @@ export const getPost = async(req, res) => {
         const [rows] = await pool.query('SELECT * FROM posts WHERE idposts = ?',[req.params.ids ])
     
         if  (rows.length <= 0) return res.status(404).json({message: "post not found"})
-        res.json(rows[0])
+        return res.json(rows[0])
     }catch(error){
         return res.status(500).json({message: error})
     }
